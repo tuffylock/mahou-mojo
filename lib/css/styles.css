@@ -1,7 +1,11 @@
-body {
+html {
   text-align: center;
+  background: url('../../assets/images/forestnight.png') no-repeat center center fixed;
+  background-size: cover;
 }
 
 #game {
+  height: 99vh;
+  width: 66vh;
   display: inline-block;
 }
