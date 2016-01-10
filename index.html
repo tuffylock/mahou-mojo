@@ -10,46 +10,7 @@
 
   <div id="game"/>
 
-  <script type="text/javascript">
-
-  var game = new Phaser.Game(480, 720, Phaser.AUTO, 'game', { preload: preload, create: create, update: update, render: render }, true, false);
-
-  function preload() {
-    game.load.image('witch', 'assets/images/witch.png');
-  }
-
-  var player;
-  var cursors;
-
-  function create() {
-    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-
-    player = game.add.sprite(game.world.centerX, 700, 'witch');
-    player.anchor.setTo(0.5, 1);
-
-    game.physics.enable(player, Phaser.Physics.ARCADE);
-
-    //  And some controls to play the game with
-    cursors = game.input.keyboard.createCursorKeys();
-  }
-
-  function update() {
-      if (cursors.left.isDown) {
-        player.x = (game.world.centerX - 150);
-        player.rotation = 0.3;      }
-      else if (cursors.right.isDown) {
-        player.x = (game.world.centerX + 150);
-        player.rotation = - 0.3;
-      } else {
-        player.x = (game.world.centerX);
-        player.angle = 0;
-      }
-  }
-
-  function render() {
-
-  }
-  </script>
+  <script src="lib/game.js"></script>
 
 </body>
 </html>
