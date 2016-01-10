@@ -5,7 +5,8 @@ html {
 }
 
 #game {
-  height: 99vh;
+  height: 100vh;
   width: 66vh;
   display: inline-block;
+  margin: 0 auto;
 }
