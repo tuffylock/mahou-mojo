@@ -1,3 +1,6 @@
+(function() {
+  'use strict';
+
 var beatmap = [
   {time: 1000, pos: -120},
   {time: 1500, pos: -120},
@@ -33,7 +36,7 @@ var beatmap = [
   {time: 19000, pos: 0}
 ];
 
-var game = new Phaser.Game(480, 720, Phaser.AUTO, 'game', { preload: preload, create: create, update: update, render: render }, true, false);
+var game = new Phaser.Game(480, 720, Phaser.AUTO, 'mahou-mojo', { preload: preload, create: create, update: update, render: render }, true, true);
 
 function preload() {
   game.time.advancedTiming = true;
@@ -41,18 +44,30 @@ function preload() {
   game.load.spritesheet('star', 'assets/images/star.png', 75, 80);
   game.load.image('player', 'assets/images/witch.png');
   game.load.image('playerHitbox', 'assets/images/playerHitbox.png');
+
+  game.load.audio('helloalone', 'assets/audio/alcali-hellohelloalone.m4a');
 }
 
 var stars;
 var player;
 var playerHitbox;
 var playerTrail;
+var missedStars;
+
+var comboTracker;
+var scoreTracker;
+
+var combo = 0;
+var score = 0;
 
 var text;
 
 var cursors;
 
 function create() {
+  var music = game.add.audio('helloalone');
+  music.play();
+
   game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
   stars = game.add.group();
@@ -69,16 +84,26 @@ function create() {
   playerHitbox = game.add.sprite(game.world.centerX, 550, 'playerHitbox');
   playerHitbox.anchor.setTo(0.5);
 
-  playerTrail = game.add.emitter(-2, -30, 100);
+  playerTrail = game.add.emitter(-2, -30, 500);
   playerTrail.makeParticles('star');
   playerTrail.width = 40;
   playerTrail.height = 10;
-  playerTrail.setYSpeed(-20, 50);
+  playerTrail.setYSpeed(-30, 100);
   playerTrail.setRotation(-100, 100);
   playerTrail.setAlpha(0.1, 0.8, 1000);
   playerTrail.setScale(0.02, 0.2, 0.02, 0.2, 2000, Phaser.Easing.Cubic.Out);
   player.addChild(playerTrail);
   playerTrail.start(false, 2000, 1000);
+
+  comboTracker = game.add.text(0, 20, "combo:\n" + combo, {font: '36px "pixelcute"', fill: 'pink', align: 'center'});
+  comboTracker.anchor.setTo(0, 0);
+  comboTracker.rotation = -0.2;
+  comboTracker.alpha = 0.8;
+
+  scoreTracker = game.add.text(470, 36, "points:\n" + score, {font: '36px "pixelcute"', fill: 'lemonchiffon', align: 'center'});
+  scoreTracker.anchor.setTo(1, 0);
+  scoreTracker.rotation = 0.3;
+  scoreTracker.alpha = 0.8;
 
   missedStars = game.add.group();
 
@@ -114,6 +139,12 @@ function spawnStar(pos) {
 }
 
 function collect(item) {
+  combo += 1;
+  updateCombo();
+
+  score += combo / .1;
+  updateScore();
+
   game.add.tween(item.scale).to({ x: 4, y: 4 }, 500, Phaser.Easing.Linear.None, true);
   var scored = game.add.tween(item).to({ alpha: 0, angle: '+360' }, 500, Phaser.Easing.Linear.None, true);
 
@@ -124,11 +155,14 @@ function collect(item) {
 }
 
 function missed(item, pos) {
+  combo = 0;
+  updateCombo();
+
   stars.remove(item);
   missedStars.add(item);
 
   game.add.tween(item.scale).to({ x: 1.2, y: 1.2 }, 300, Phaser.Easing.Linear.None, true);
-  var scored = game.add.tween(item).to({ y: 800, x: game.world.centerX + (2 * pos), alpha: 0.2 }, 300, Phaser.Easing.Linear.None, true);
+  var scored = game.add.tween(item).to({ y: 800, x: game.world.centerX + (2 * pos), alpha: 0.5 }, 300, Phaser.Easing.Linear.None, true);
 
   scored.onComplete.add(function (item) {
     missedStars.remove(item);
@@ -136,6 +170,15 @@ function missed(item, pos) {
     item.kill();
   });
   text = 'missed.';
+}
+
+function updateCombo() {
+  comboTracker.setText("combo:\n" + combo);
+  playerTrail.frequency = 1000 - (combo * 100);
+}
+
+function updateScore() {
+  scoreTracker.setText("points:\n" + score);
 }
 
 function update() {
@@ -159,10 +202,11 @@ function checkOverlap(incoming) {
 }
 
 function render() {
-  game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
-  game.debug.text(text, 50, 300, "#00ff00");
+  // game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
+  // game.debug.text(text, 50, 300, "#00ff00", 'kitty');
   // game.debug.spriteBounds(player);
   // game.debug.spriteBounds(playerHitbox);
   // game.debug.spriteBounds(star || player);
   // game.debug.text(game.time.totalElapsedSeconds(), 2, 40, "white");
 }
+}());
