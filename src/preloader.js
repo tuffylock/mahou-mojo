@@ -1,6 +1,3 @@
-var Mahou = Mahou || {};
-
-
 Mahou.Preloader = function (game) {
   // this.loadingBar = null;
 

@@ -6,6 +6,7 @@
   game.state.add('Boot', Mahou.Boot);
   game.state.add('Preloader', Mahou.Preloader);
   game.state.add('Game', Mahou.Game);
+  game.state.add('GameOver', Mahou.GameOver);
 
   game.state.start('Boot');
 

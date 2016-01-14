@@ -1,9 +1,8 @@
-var Mahou = Mahou || {};
-
 Mahou.Game = function (game) {};
 
-var lastTime = 0;
-var mapbeats = [];
+// // create mode
+// var lastTime = 0;
+// var mapbeats = [];
 
 var beatmap = [
   {
@@ -785,14 +784,6 @@ var beatmap = [
   {
     "time": 124710,
     "pos": 0
-  },
-  {
-    "time": 133312,
-    "pos": 0
-  },
-  {
-    "time": 133844,
-    "pos": 0
   }
 ];
 
@@ -803,23 +794,33 @@ var playerHitbox;
 var playerTrail;
 var missedStars;
 
-var comboTracker;
-var scoreTracker;
-
-var combo = 0;
-var score = 0;
-
-var text;
+var comboTracker = null;
+var scoreTracker = null;
 
 var cursors;
 
 Mahou.Game.prototype = {
 
   preload: function () {
+    this.game.time.reset();
+
+    this.combo = 0;
+    this.highestCombo = 0;
+
+    this.score = 0;
+
+    this.misses = 0;
+
     this.music = this.add.audio('helloalone');
 
     stars = this.add.group();
     this.setupStars();
+
+    player = this.add.sprite(this.world.centerX, 700, 'player');
+    player.anchor.setTo(0.5, 1);
+
+    playerHitbox = this.add.sprite(this.world.centerX, 550, 'playerHitbox');
+    playerHitbox.anchor.setTo(0.5);
 
     beatmap.forEach(function (beat) {
       this.time.events.add(beat["time"] - 3900, this.spawnStar, this, beat["pos"]);
@@ -829,12 +830,7 @@ Mahou.Game.prototype = {
   create: function () {
     this.music.play();
 
-    player = this.add.sprite(this.world.centerX, 700, 'player');
-    player.anchor.setTo(0.5, 1);
     this.add.tween(player).to({ y: 720 }, 280, Phaser.Easing.Quadratic.InOut, true, 0, -1, true);
-
-    playerHitbox = this.add.sprite(this.world.centerX, 550, 'playerHitbox');
-    playerHitbox.anchor.setTo(0.5);
 
     playerTrail = this.add.emitter(-2, -30, 200);
     playerTrail.makeParticles('star');
@@ -847,17 +843,19 @@ Mahou.Game.prototype = {
     player.addChild(playerTrail);
     playerTrail.start(false, 3000, 1000);
 
-    comboTracker = this.add.text(0, 30, "combo:\n" + combo, {font: '36px "pixelcute"', fill: 'pink', align: 'center'});
+    comboTracker = this.add.text(0, 30, "combo:\n" + this.combo, {font: '36px "pixelcute"', fill: 'pink', align: 'center'});
     comboTracker.anchor.setTo(0, 0);
     comboTracker.rotation = -0.3;
     comboTracker.alpha = 0.8;
 
-    scoreTracker = this.add.text(470, 35, "points:\n" + score, {font: '36px "pixelcute"', fill: 'lemonchiffon', align: 'center'});
+    scoreTracker = this.add.text(470, 35, "points:\n" + this.score, {font: '36px "pixelcute"', fill: 'lemonchiffon', align: 'center'});
     scoreTracker.anchor.setTo(1, 0);
     scoreTracker.rotation = 0.3;
     scoreTracker.alpha = 0.8;
 
     missedStars = this.add.group();
+
+    this.songEnd = (beatmap[beatmap.length - 1].time) / 1000;
 
     cursors = this.input.keyboard.createCursorKeys();
   },
@@ -891,10 +889,14 @@ Mahou.Game.prototype = {
   },
 
   collect: function (item) {
-    combo += 1;
+    this.combo += 1;
     this.updateCombo();
 
-    score += combo / 0.1;
+    if (this.combo > this.highestCombo) {
+      this.highestCombo = this.combo;
+    }
+
+    this.score += this.combo / 0.1;
     this.updateScore();
 
     this.add.tween(item.scale).to({ x: 4, y: 4 }, 500, Phaser.Easing.Linear.None, true);
@@ -903,12 +905,13 @@ Mahou.Game.prototype = {
     scored.onComplete.add(function (item) {
       item.kill();
     });
-    text = 'hit!';
   },
 
   missed: function (item, pos) {
-    combo = 0;
+    this.combo = 0;
     this.updateCombo();
+
+    this.misses += 1;
 
     stars.remove(item);
     missedStars.add(item);
@@ -921,37 +924,46 @@ Mahou.Game.prototype = {
       stars.add(item);
       item.kill();
     });
-    text = 'missed.';
   },
 
   updateCombo: function () {
-    comboTracker.setText("combo:\n" + combo);
-    playerTrail.frequency = 1000 - (combo * 20);
+    comboTracker.setText("combo:\n" + this.combo);
+    playerTrail.frequency = 1000 - (this.combo * 20);
   },
 
   updateScore: function () {
-    scoreTracker.setText("points:\n" + score);
+    scoreTracker.setText("points:\n" + this.score);
   },
 
   update: function () {
-    var milliseconds = Math.floor(this.time.totalElapsedSeconds() * 1000);
-    if (milliseconds - lastTime >= 300) {
-      if (cursors.left.isDown) {
-        mapbeats.push({ time: milliseconds, pos: -120 });
-        lastTime = milliseconds;
-      } else if (cursors.right.isDown) {
-        mapbeats.push({ time: milliseconds, pos: 120 });
-        lastTime = milliseconds;
-      } else if (cursors.up.isDown) {
-        mapbeats.push({ time: milliseconds, pos: 0 });
-        lastTime = milliseconds;
-      } else if (cursors.down.isDown) {
-        console.log(mapbeats);
-        lastTime = milliseconds;
-      }
+
+    // // create mode
+    // var milliseconds = Math.floor(this.time.totalElapsedSeconds() * 1000);
+    // if (milliseconds - lastTime >= 300) {
+    //   if (cursors.left.isDown) {
+    //     mapbeats.push({ time: milliseconds, pos: -120 });
+    //     lastTime = milliseconds;
+    //   } else if (cursors.right.isDown) {
+    //     mapbeats.push({ time: milliseconds, pos: 120 });
+    //     lastTime = milliseconds;
+    //   } else if (cursors.up.isDown) {
+    //     mapbeats.push({ time: milliseconds, pos: 0 });
+    //     lastTime = milliseconds;
+    //   } else if (cursors.down.isDown) {
+    //     console.log(mapbeats);
+    //     lastTime = milliseconds;
+    //   }
+    // }
+
+    if (this.time.totalElapsedSeconds() >= this.songEnd) {
+      this.wrapUp();
     }
 
-    if (cursors.left.isDown) {
+    if (cursors.up.isDown || cursors.down.isDown) {
+      playerHitbox.x = (this.world.centerX);
+      player.x = (this.world.centerX);
+      player.angle = 0;
+    } else if (cursors.left.isDown) {
       playerHitbox.x = (this.world.centerX - 120);
       player.x = (this.world.centerX - 160);
       player.rotation = 0.3;
@@ -964,6 +976,10 @@ Mahou.Game.prototype = {
       player.x = (this.world.centerX);
       player.angle = 0;
     }
+  },
+
+  wrapUp: function () {
+    this.state.start('GameOver', true, false, this.highestCombo, this.score, this.misses, beatmap.length);
   },
 
   checkOverlap: function (incoming) {
