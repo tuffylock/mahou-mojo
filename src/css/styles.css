@@ -3,18 +3,18 @@
   src: url('./fonts/pixelcute.eot?') format('eot'), url('./fonts/pixelcute.woff') format('woff'), url('./fonts/pixelcute.ttf') format('truetype');
 }
 
-html {
+body {
   text-align: center;
   background: url('../../assets/images/forestnight.png') no-repeat center center fixed;
   background-size: cover;
   font-family: 'pixelcute';
-  color: white;
-  font-size: 72px;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .game {
   height: 100vh;
   width: 66vh;
   display: inline-block;
-  margin: 0 auto;
 }
