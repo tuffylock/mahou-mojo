@@ -811,7 +811,8 @@ Mahou.Game.prototype = {
 
     this.misses = 0;
 
-    this.music = this.add.audio('helloalone');
+    music.stop();
+    music = this.add.audio('hellohello');
 
     stars = this.add.group();
     this.setupStars();
@@ -828,7 +829,12 @@ Mahou.Game.prototype = {
   },
 
   create: function () {
-    this.music.play();
+    // this.curtime = this.add.text(100, 100, music.currentTime, {font: "36px 'pixelcute'", fill: 'pink', align: 'center'});
+    // this.game.onBlur.add( function () {
+    //   this.curtime.setText('boo!');
+    // }, this);
+    // this.curtime.setText(music.currentTime);
+    music.play();
 
     this.add.tween(player).to({ y: 720 }, 280, Phaser.Easing.Quadratic.InOut, true, 0, -1, true);
 
@@ -843,12 +849,12 @@ Mahou.Game.prototype = {
     player.addChild(playerTrail);
     playerTrail.start(false, 3000, 1000);
 
-    comboTracker = this.add.text(0, 30, "combo:\n" + this.combo, {font: '36px "pixelcute"', fill: 'pink', align: 'center'});
+    comboTracker = this.add.text(0, 30, "combo:\n" + this.combo, {font: "36px 'pixelcute'", fill: 'pink', align: 'center'});
     comboTracker.anchor.setTo(0, 0);
     comboTracker.rotation = -0.3;
     comboTracker.alpha = 0.8;
 
-    scoreTracker = this.add.text(470, 35, "points:\n" + this.score, {font: '36px "pixelcute"', fill: 'lemonchiffon', align: 'center'});
+    scoreTracker = this.add.text(470, 35, "points:\n" + this.score, {font: "36px 'pixelcute'", fill: 'lemonchiffon', align: 'center'});
     scoreTracker.anchor.setTo(1, 0);
     scoreTracker.rotation = 0.3;
     scoreTracker.alpha = 0.8;
@@ -979,6 +985,7 @@ Mahou.Game.prototype = {
   },
 
   wrapUp: function () {
+    music.stop();
     this.state.start('GameOver', true, false, this.highestCombo, this.score, this.misses, beatmap.length);
   },
 
