@@ -161,7 +161,7 @@ Mahou.Game.prototype = {
 
     // // create mode
     var milliseconds = Math.floor(this.time.totalElapsedSeconds() * 1000);
-    if (milliseconds - lastTime >= 300) {
+    if (milliseconds - lastTime >= 250) {
       if (cursors.left.isDown) {
         mapbeats.push({ time: milliseconds, pos: -120 });
         lastTime = milliseconds;

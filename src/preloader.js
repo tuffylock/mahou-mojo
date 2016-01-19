@@ -5,6 +5,8 @@ Mahou.Preloader.prototype = {
     this.loadingBar = this.add.sprite(100, 100, 'loadingBar');
     this.load.setPreloadSprite(this.loadingBar);
 
+    this.add.text(this.world.centerX, -100, 'Mahou Mojo!', {font: "12px 'pixelcute'", fill: 'ivory', align: 'center'}).anchor.setTo(0.5);
+
     this.load.image('menubox', 'assets/images/menubox.png');
     this.load.image('infobox', 'assets/images/infobox.png');
     this.load.image('button', 'assets/images/button.png');
@@ -22,7 +24,8 @@ Mahou.Preloader.prototype = {
 
     this.load.audio('alonetogether', ['assets/audio/alonetogether.m4a', 'assets/audio/alonetogether.ogg']);
     this.load.audio('hellohello', ['assets/audio/hellohello.m4a', 'assets/audio/hellohello.ogg']);
-
+    this.load.audio('monamour', 'assets/audio/femmes.m4a');
+    this.load.audio('another', 'assets/audio/another.m4a');
   },
 
   update: function () {

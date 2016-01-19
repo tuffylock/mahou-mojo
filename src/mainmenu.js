@@ -51,7 +51,7 @@ Mahou.MainMenu.prototype = {
   },
 
   clickControl: function () {
-    this.state.start('GameOver');
+    this.state.start('Controls');
   },
 
   controlHover: function () {
