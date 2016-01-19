@@ -52,6 +52,7 @@ Mahou.SongSelect.prototype = {
   },
 
   clickUp: function () {
+    click.play();
     var index = SONGS.indexOf(song) - 1;
     if (index < 0) {
       index = SONGS.length - 1;
@@ -80,6 +81,7 @@ Mahou.SongSelect.prototype = {
   },
 
   clickDown: function () {
+    click.play();
     var index = SONGS.indexOf(song) + 1;
     if (index === SONGS.length) {
       index = 0;
@@ -109,17 +111,19 @@ Mahou.SongSelect.prototype = {
 
   clickBack: function () {
     music.stop();
+    click.play();
     this.state.start('MainMenu');
   },
 
   clickGo: function () {
+    click.play();
     this.state.start('Game');
   }
 };
 
 
 var SONGS = [
-  { track: 'monamour',
+  { track: 'alonetogether',
     title: 'Alone Together',
     artist: 'Aivi and Surasshu',
     album: 'Fusion Mixtape',
@@ -509,13 +513,395 @@ var SONGS = [
     ]
   },
 
-  { track: 'another',
-    title: 'title',
-    artist: 'artist',
-    album: 'album',
-    length: '0:00',
-    beat: 100,
-    beatmap: {} },
+  { track: 'monamour',
+    title: 'Mon Amour, Ami',
+    artist: 'Virginie Ledoyen',
+    album: '8 Femmes',
+    length: '1:44',
+    beat: 250,
+    beatmap: [
+      {
+        "time": 2567,
+        "pos": -120
+      },
+      {
+        "time": 2867,
+        "pos": -120
+      },
+      {
+        "time": 3167,
+        "pos": -120
+      },
+      {
+        "time": 3467,
+        "pos": -120
+      },
+      {
+        "time": 3767,
+        "pos": -120
+      },
+      {
+        "time": 4067,
+        "pos": -120
+      },
+      {
+        "time": 4369,
+        "pos": -120
+      },
+      {
+        "time": 4684,
+        "pos": -120
+      },
+      {
+        "time": 4984,
+        "pos": 120
+      },
+      {
+        "time": 5284,
+        "pos": 120
+      },
+      {
+        "time": 5584,
+        "pos": 120
+      },
+      {
+        "time": 5884,
+        "pos": 120
+      },
+      {
+        "time": 6184,
+        "pos": 120
+      },
+      {
+        "time": 6484,
+        "pos": 120
+      },
+      {
+        "time": 6784,
+        "pos": 120
+      },
+      {
+        "time": 7084,
+        "pos": 120
+      },
+      {
+        "time": 8534,
+        "pos": -120
+      },
+      {
+        "time": 8836,
+        "pos": -120
+      },
+      {
+        "time": 9152,
+        "pos": -120
+      },
+      {
+        "time": 10584,
+        "pos": 120
+      },
+      {
+        "time": 10884,
+        "pos": 120
+      },
+      {
+        "time": 11184,
+        "pos": 120
+      },
+      {
+        "time": 11485,
+        "pos": -120
+      },
+      {
+        "time": 11785,
+        "pos": -120
+      },
+      {
+        "time": 13001,
+        "pos": 120
+      },
+      {
+        "time": 13303,
+        "pos": 120
+      },
+      {
+        "time": 13651,
+        "pos": -120
+      },
+      {
+        "time": 13951,
+        "pos": -120
+      },
+      {
+        "time": 15319,
+        "pos": 120
+      },
+      {
+        "time": 15635,
+        "pos": 120
+      },
+      {
+        "time": 15935,
+        "pos": -120
+      },
+      {
+        "time": 16251,
+        "pos": -120
+      },
+      {
+        "time": 16552,
+        "pos": 120
+      },
+      {
+        "time": 16852,
+        "pos": 120
+      },
+      {
+        "time": 17152,
+        "pos": 120
+      },
+      {
+        "time": 17452,
+        "pos": 120
+      },
+      {
+        "time": 17852,
+        "pos": -120
+      },
+      {
+        "time": 18152,
+        "pos": -120
+      },
+      {
+        "time": 18453,
+        "pos": -120
+      },
+      {
+        "time": 20019,
+        "pos": 120
+      },
+      {
+        "time": 20319,
+        "pos": 120
+      },
+      {
+        "time": 20619,
+        "pos": -120
+      },
+      {
+        "time": 20919,
+        "pos": -120
+      },
+      {
+        "time": 22286,
+        "pos": 120
+      },
+      {
+        "time": 22586,
+        "pos": 120
+      },
+      {
+        "time": 22886,
+        "pos": -120
+      },
+      {
+        "time": 23186,
+        "pos": -120
+      },
+      {
+        "time": 24703,
+        "pos": 120
+      },
+      {
+        "time": 25003,
+        "pos": 120
+      },
+      {
+        "time": 25303,
+        "pos": -120
+      },
+      {
+        "time": 25603,
+        "pos": -120
+      },
+      {
+        "time": 27003,
+        "pos": 120
+      },
+      {
+        "time": 27303,
+        "pos": 120
+      },
+      {
+        "time": 27820,
+        "pos": 120
+      },
+      {
+        "time": 28120,
+        "pos": 120
+      },
+      {
+        "time": 29389,
+        "pos": -120
+      },
+      {
+        "time": 29703,
+        "pos": -120
+      },
+      {
+        "time": 30604,
+        "pos": -120
+      },
+      {
+        "time": 30920,
+        "pos": -120
+      },
+      {
+        "time": 31227,
+        "pos": -120
+      },
+      {
+        "time": 31537,
+        "pos": -120
+      },
+      {
+        "time": 31837,
+        "pos": -120
+      },
+      {
+        "time": 32420,
+        "pos": 120
+      },
+      {
+        "time": 32720,
+        "pos": 120
+      },
+      {
+        "time": 34304,
+        "pos": 120
+      },
+      {
+        "time": 34604,
+        "pos": 120
+      },
+      {
+        "time": 34904,
+        "pos": 120
+      },
+      {
+        "time": 35204,
+        "pos": 120
+      },
+      {
+        "time": 35987,
+        "pos": -120
+      },
+      {
+        "time": 36287,
+        "pos": -120
+      },
+      {
+        "time": 37104,
+        "pos": 120
+      },
+      {
+        "time": 37404,
+        "pos": 120
+      },
+      {
+        "time": 37704,
+        "pos": 120
+      },
+      {
+        "time": 38856,
+        "pos": -120
+      },
+      {
+        "time": 39171,
+        "pos": -120
+      },
+      {
+        "time": 39471,
+        "pos": -120
+      },
+      {
+        "time": 39771,
+        "pos": -120
+      },
+      {
+        "time": 40071,
+        "pos": 120
+      },
+      {
+        "time": 40371,
+        "pos": 120
+      },
+      {
+        "time": 40671,
+        "pos": -120
+      },
+      {
+        "time": 40973,
+        "pos": -120
+      },
+      {
+        "time": 41288,
+        "pos": 120
+      },
+      {
+        "time": 41588,
+        "pos": 120
+      },
+      {
+        "time": 41888,
+        "pos": -120
+      },
+      {
+        "time": 42188,
+        "pos": -120
+      },
+      {
+        "time": 42955,
+        "pos": -120
+      },
+      {
+        "time": 43290,
+        "pos": -120
+      },
+      {
+        "time": 43605,
+        "pos": 120
+      },
+      {
+        "time": 43905,
+        "pos": 120
+      },
+      {
+        "time": 44205,
+        "pos": 120
+      },
+      {
+        "time": 44505,
+        "pos": 120
+      },
+      {
+        "time": 44805,
+        "pos": 120
+      },
+      {
+        "time": 46137,
+        "pos": 0
+      },
+      {
+        "time": 47137,
+        "pos": 0
+      },
+      {
+        "time": 48171,
+        "pos": 0
+      }
+    ]
+  },
 
   { track: 'hellohello',
     title: 'Hello, Hello',

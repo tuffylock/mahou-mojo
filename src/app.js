@@ -3,6 +3,8 @@
 
   var game = new Phaser.Game(480, 720, Phaser.CANVAS, '', {}, true, false);
 
+  var click;
+
   var music;
   var song;
 

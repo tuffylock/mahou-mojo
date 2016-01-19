@@ -12,6 +12,8 @@ Mahou.MainMenu.prototype = {
       music.play();
     }
 
+    click = this.add.audio('click', 0.2);
+
     this.add.sprite(this.world.centerX, 50, 'menubox').anchor.setTo(0.5, 0);
 
     var playButton = this.add.button(this.world.centerX, 420, 'button', this.clickPlay, this);
@@ -40,6 +42,7 @@ Mahou.MainMenu.prototype = {
   },
 
   clickPlay: function () {
+    click.play();
     this.state.start('SongSelect');
   },
 
@@ -51,6 +54,7 @@ Mahou.MainMenu.prototype = {
   },
 
   clickControl: function () {
+    click.play();
     this.state.start('Controls');
   },
 

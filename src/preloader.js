@@ -15,6 +15,8 @@ Mahou.Preloader.prototype = {
     this.load.image('upArrow', 'assets/images/upArrow.png');
     this.load.image('downArrow', 'assets/images/downArrow.png');
 
+    this.load.audio('click', ['assets/audio/click.m4a', 'assets/audio/click.ogg']);
+
     this.load.spritesheet('star', 'assets/images/star.png', 75, 80);
     this.load.image('player', 'assets/images/witch.png');
     this.load.image('playerHitbox', 'assets/images/playerHitbox.png');
@@ -23,9 +25,8 @@ Mahou.Preloader.prototype = {
     this.load.audio('birdsong', ['assets/audio/birdsong.m4a', 'assets/audio/birdsong.ogg']);
 
     this.load.audio('alonetogether', ['assets/audio/alonetogether.m4a', 'assets/audio/alonetogether.ogg']);
+    this.load.audio('monamour', ['assets/audio/monamour.m4a', 'assets/audio/monamour.ogg']);
     this.load.audio('hellohello', ['assets/audio/hellohello.m4a', 'assets/audio/hellohello.ogg']);
-    this.load.audio('monamour', 'assets/audio/femmes.m4a');
-    this.load.audio('another', 'assets/audio/another.m4a');
   },
 
   update: function () {

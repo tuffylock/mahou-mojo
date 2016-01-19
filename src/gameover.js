@@ -56,11 +56,13 @@ Mahou.GameOver.prototype = {
   },
 
   newSong: function () {
+    click.play();
     this.birdsong.stop();
     this.state.start('SongSelect');
   },
 
   restart: function () {
+    click.play();
     this.birdsong.stop();
     this.state.start('Game');
   }

@@ -77,7 +77,7 @@ Mahou.Game.prototype = {
 
     missedStars = this.add.group();
 
-    this.songEnd = (song.beatmap[song.beatmap.length - 1].time) / 1000;
+    // this.songEnd = (song.beatmap[song.beatmap.length - 1].time) / 1000;
 
     cursors = this.input.keyboard.createCursorKeys();
   },
