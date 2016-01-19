@@ -10,6 +10,7 @@ Mahou.Boot.prototype = {
 
     // scale with viewport size, show full game area
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.scale.pageAlignHorizontally = true;
   },
 
   preload: function () {

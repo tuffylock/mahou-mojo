@@ -1,10 +1,12 @@
 (function () {
   'use strict';
 
-  var game = new Phaser.Game(480, 720, Phaser.CANVAS, 'mahou-mojo', {}, true);
+  var game = new Phaser.Game(480, 720, Phaser.CANVAS, '', {}, true, false);
 
   var music;
   var song;
+
+  var stars;
 
   game.state.add('Boot', Mahou.Boot);
   game.state.add('Preloader', Mahou.Preloader);

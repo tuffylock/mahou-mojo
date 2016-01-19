@@ -22,6 +22,7 @@ Mahou.Preloader.prototype = {
 
     this.load.audio('alonetogether', ['assets/audio/alonetogether.m4a', 'assets/audio/alonetogether.ogg']);
     this.load.audio('hellohello', ['assets/audio/hellohello.m4a', 'assets/audio/hellohello.ogg']);
+
   },
 
   update: function () {
