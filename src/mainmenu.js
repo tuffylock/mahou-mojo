@@ -44,8 +44,8 @@ Mahou.MainMenu.prototype = {
   },
 
   playHover: function () {
-    this.add.tween(this.leftStar).to({ y: 420 }, 50, Phaser.Easing.Linear.None, true);
-    this.add.tween(this.rightStar).to({ y: 420 }, 50, Phaser.Easing.Linear.None, true);
+    this.add.tween(this.leftStar).to({ y: 420 }, 50, 'Linear', true);
+    this.add.tween(this.rightStar).to({ y: 420 }, 50, 'Linear', true);
 
     this.infoText.setText(this.playText);
   },
@@ -55,8 +55,8 @@ Mahou.MainMenu.prototype = {
   },
 
   controlHover: function () {
-    this.add.tween(this.leftStar).to({ y: 520 }, 50, Phaser.Easing.Linear.None, true);
-    this.add.tween(this.rightStar).to({ y: 520 }, 50, Phaser.Easing.Linear.None, true);
+    this.add.tween(this.leftStar).to({ y: 520 }, 50, 'Linear', true);
+    this.add.tween(this.rightStar).to({ y: 520 }, 50, 'Linear', true);
 
     this.infoText.setText(this.controlText);
   }

@@ -3,7 +3,8 @@
 
   var game = new Phaser.Game(480, 720, Phaser.CANVAS, 'mahou-mojo', {}, true);
 
-  var music = null;
+  var music;
+  var song;
 
   game.state.add('Boot', Mahou.Boot);
   game.state.add('Preloader', Mahou.Preloader);

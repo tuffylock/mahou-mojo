@@ -812,7 +812,7 @@ Mahou.Game.prototype = {
     this.misses = 0;
 
     music.stop();
-    music = this.add.audio('hellohello');
+    music = this.add.audio(song.track);
 
     stars = this.add.group();
     this.setupStars();
@@ -836,7 +836,7 @@ Mahou.Game.prototype = {
     // this.curtime.setText(music.currentTime);
     music.play();
 
-    this.add.tween(player).to({ y: 720 }, 280, Phaser.Easing.Quadratic.InOut, true, 0, -1, true);
+    this.add.tween(player).to({ y: 720 }, 280, 'Quad.easeInOut', true, 0, -1, true);
 
     playerTrail = this.add.emitter(-2, -30, 200);
     playerTrail.makeParticles('star');
@@ -845,7 +845,7 @@ Mahou.Game.prototype = {
     playerTrail.setYSpeed(-40, 100);
     playerTrail.setRotation(-100, 100);
     playerTrail.setAlpha(0.1, 0.8, 1000);
-    playerTrail.setScale(0.01, 0.4, 0.01, 0.4, 3000, Phaser.Easing.Cubic.Out);
+    playerTrail.setScale(0.01, 0.4, 0.01, 0.4, 3000, 'Cubic.easeOut');
     player.addChild(playerTrail);
     playerTrail.start(false, 3000, 1000);
 
@@ -881,9 +881,9 @@ Mahou.Game.prototype = {
     star.scale.setTo(0, 0);
     star.alpha = 1;
 
-    var drop = this.add.tween(star).to({ y: 590 }, 3000, Phaser.Easing.Linear.None, true);
-    this.add.tween(star).to({ x: this.world.centerX + pos }, 3000, Phaser.Easing.Sinusoidal.In, true);
-    this.add.tween(star.scale).to({ x: 1, y: 1}, 3000, Phaser.Easing.Sinusoidal.In, true);
+    var drop = this.add.tween(star).to({ y: 590 }, 3000, 'Linear', true);
+    this.add.tween(star).to({ x: this.world.centerX + pos }, 3000, 'Sine.easeIn', true);
+    this.add.tween(star.scale).to({ x: 1, y: 1}, 3000, 'Sine.easeIn', true);
 
     drop.onComplete.add(function (star) {
       if (this.checkOverlap(star)) {
@@ -905,8 +905,8 @@ Mahou.Game.prototype = {
     this.score += this.combo / 0.1;
     this.updateScore();
 
-    this.add.tween(item.scale).to({ x: 4, y: 4 }, 500, Phaser.Easing.Linear.None, true);
-    var scored = this.add.tween(item).to({ alpha: 0, angle: '+360' }, 500, Phaser.Easing.Linear.None, true);
+    this.add.tween(item.scale).to({ x: 4, y: 4 }, 500, 'Linear', true);
+    var scored = this.add.tween(item).to({ alpha: 0, angle: '+360' }, 500, 'Linear', true);
 
     scored.onComplete.add(function (item) {
       item.kill();
@@ -922,8 +922,8 @@ Mahou.Game.prototype = {
     stars.remove(item);
     missedStars.add(item);
 
-    this.add.tween(item.scale).to({ x: 1.2, y: 1.2 }, 300, Phaser.Easing.Linear.None, true);
-    var scored = this.add.tween(item).to({ y: 800, x: this.world.centerX + (2 * pos), alpha: 0.5 }, 300, Phaser.Easing.Linear.None, true);
+    this.add.tween(item.scale).to({ x: 1.2, y: 1.2 }, 300, 'Linear', true);
+    var scored = this.add.tween(item).to({ y: 800, x: this.world.centerX + (2 * pos), alpha: 0.5 }, 300, 'Linear', true);
 
     scored.onComplete.add(function (item) {
       missedStars.remove(item);
