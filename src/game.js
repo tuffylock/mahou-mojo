@@ -40,7 +40,7 @@ Mahou.Game.prototype = {
     playerHitbox.anchor.setTo(0.5);
 
     song.beatmap.forEach(function (beat) {
-      this.time.events.add(beat["time"] - 3000, this.spawnStar, this, beat["pos"]);
+      this.game.time.events.add(beat["time"] - 3200, this.spawnStar, this, beat["pos"]);
     }, this);
   },
 
@@ -65,15 +65,19 @@ Mahou.Game.prototype = {
     player.addChild(playerTrail);
     playerTrail.start(false, 3000, 1000);
 
-    comboTracker = this.add.text(0, 30, "combo:\n" + this.combo, {font: "36px 'pixelcute'", fill: 'pink', align: 'center'});
-    comboTracker.anchor.setTo(0, 0);
+    comboTracker = this.add.text(90, 60, "combo:\n" + this.combo, {font: "36px 'pixelcute'", fill: 'pink', align: 'center'});
+    comboTracker.anchor.setTo(0.5);
     comboTracker.rotation = -0.3;
     comboTracker.alpha = 0.8;
 
-    scoreTracker = this.add.text(470, 35, "points:\n" + this.score, {font: "36px 'pixelcute'", fill: 'lemonchiffon', align: 'center'});
-    scoreTracker.anchor.setTo(1, 0);
+    this.add.tween(comboTracker.scale).to({ x: 0.98, y: 0.96 }, song.beat, 'Linear', true, 0, -1, true);
+
+    scoreTracker = this.add.text(380, 65, "points:\n" + this.score, {font: "36px 'pixelcute'", fill: 'lemonchiffon', align: 'center'});
+    scoreTracker.anchor.setTo(0.5);
     scoreTracker.rotation = 0.3;
     scoreTracker.alpha = 0.8;
+
+    this.add.tween(scoreTracker.scale).to({ x: 0.98, y: 0.96 }, song.beat, 'Linear', true, 0, -1, true);
 
     missedStars = this.add.group();
 
@@ -161,7 +165,7 @@ Mahou.Game.prototype = {
 
     // // create mode
     var milliseconds = Math.floor(this.time.totalElapsedSeconds() * 1000);
-    if (milliseconds - lastTime >= 250) {
+    if (milliseconds - lastTime >= 400) {
       if (cursors.left.isDown) {
         mapbeats.push({ time: milliseconds, pos: -120 });
         lastTime = milliseconds;
